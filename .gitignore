@@ -19,6 +19,9 @@
 # misc
 .DS_Store
 *.pem
+.eslintrc.json
+.idea
+prettier.config.js
 
 # debug
 npm-debug.log*
@@ -27,6 +30,7 @@ yarn-error.log*
 
 # local env files
 .env*.local
+.env
 
 # vercel
 .vercel
