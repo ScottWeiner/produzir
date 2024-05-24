@@ -1,0 +1,1 @@
+export {addNewProduct} from './addNewProduct'

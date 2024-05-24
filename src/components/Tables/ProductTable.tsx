@@ -59,12 +59,13 @@ export default function ProductTable({products}: ProductTableProps){
                         {product.description}
                       </p>                      
                       <div className="h-12.5 w-15 rounded-md">
-                        <Image
+                        {/* TODO: Images display. SUppresing for now */}
+                        {/*<Image
                           src={product.imageUrl || ''}
                           width={60}
                           height={50}
                           alt="Product"
-                        />
+              />*/}
                       </div>
                     </div>
                   </div>
