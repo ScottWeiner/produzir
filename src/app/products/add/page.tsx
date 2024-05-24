@@ -13,7 +13,7 @@ export default async function  AddNewProductPage() {
     return (
       <>
      
-        <Breadcrumb pageName="Add New Product"/>
+        <Breadcrumb navs={['Products']} pageName="Add New Product"/>
  
         {<AddProductForm params={productParams}/>}
           

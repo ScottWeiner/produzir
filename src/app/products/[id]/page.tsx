@@ -21,7 +21,7 @@ export default async function ProductMaster(props: ProductMasterProps) {
     if (!product) {
         return(
             <>
-            <Breadcrumb pageName="Product Master" />
+            <Breadcrumb navs={['Products']}  pageName="Product Master" />
             <h1>Whoopsies... this product does not exist</h1>
             </>
         )
@@ -29,7 +29,7 @@ export default async function ProductMaster(props: ProductMasterProps) {
 
     return (
         <>
-            <Breadcrumb pageName="Product Master" />
+            <Breadcrumb navs={['Products']}  pageName="Product Master" />
             <h1>Product master: {props.params.id}</h1>
             <p> SKU: {product.sku}</p>
             <p>Description: {product.description}</p>

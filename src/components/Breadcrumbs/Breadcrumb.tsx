@@ -4,8 +4,9 @@ import { usePathname } from "next/navigation";
 
 interface BreadcrumbProps {
   pageName: string;
+  navs: string[]
 }
-const Breadcrumb = ({ pageName }: BreadcrumbProps) => {
+const Breadcrumb = ({ pageName, navs }: BreadcrumbProps) => {
 
 
 
@@ -22,6 +23,11 @@ const Breadcrumb = ({ pageName }: BreadcrumbProps) => {
               Dashboard /
             </Link>
           </li>
+          {navs?.map((n: string) => {
+            return(<li key={n.toLowerCase()}>
+              <Link className="font-medium" href={`/${n.toLowerCase()}`}>{n} /</Link>
+            </li>)
+          })}
           <li className="font-medium text-primary">{pageName}</li>
         </ol>
       </nav>
