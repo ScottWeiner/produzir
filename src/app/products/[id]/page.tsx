@@ -1,6 +1,7 @@
 import Breadcrumb from "@/components/Breadcrumbs/Breadcrumb"
 import { PrismaClient } from "@prisma/client";
 
+
 interface ProductMasterProps {
     params: {
         id: string
@@ -9,6 +10,7 @@ interface ProductMasterProps {
 
 export default async function ProductMaster(props: ProductMasterProps) {
     const prisma = new PrismaClient()
+
 
     const product = await prisma.product.findUnique({
         where: {

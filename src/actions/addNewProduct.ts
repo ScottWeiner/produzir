@@ -1,6 +1,7 @@
 'use server'
 
-import { revalidatePath } from "next/cache"
+
+import { redirect } from 'next/navigation'
 import { db } from "@/db"
 import {z} from 'zod'
 
@@ -11,7 +12,9 @@ const addNewProductSchema = z.object({
     packSize: z.string().min(3).max(10),
     weight: z.string(),
     upc: z.string().min(10).max(12), 
-    imageUrl: z.string().url()
+    imageUrl: z.string().url(),
+    category: z.string().min(1).max(1),
+    subCategory: z.string().min(1).max(1)
 })
 
 interface AddProductFormState {
@@ -23,7 +26,10 @@ interface AddProductFormState {
         packSize?: string[];
         weight?: string[];
         upc?: string[];
-        imageUrl?: string[]
+        imageUrl?: string[];
+        category?: string[];
+        subCategory?: string[]
+        
         
     };
     success?: boolean | undefined;
@@ -33,6 +39,7 @@ export async function addNewProduct(addProductFormState:AddProductFormState,addN
     
     console.log("SUBMIT FORM!")
 
+    console.log(addNewProductFormData.get("category"))
     
     
     const result = addNewProductSchema.safeParse({
@@ -43,6 +50,8 @@ export async function addNewProduct(addProductFormState:AddProductFormState,addN
         weight: addNewProductFormData.get("weight"),
         upc: addNewProductFormData.get("upc"),
         imageUrl: addNewProductFormData.get("imageUrl"),
+        category: addNewProductFormData.get("category"),
+        subCategory: addNewProductFormData.get("subCategory")
     })
 
     
@@ -65,8 +74,8 @@ export async function addNewProduct(addProductFormState:AddProductFormState,addN
                 weight: result.data.weight,
                 upc: result.data.upc, 
                 imageUrl: result.data.imageUrl,
-                categoryId: 1,
-                subcategoryId: 1
+                categoryId: parseInt(result.data.category),
+                subcategoryId: parseInt(result.data.subCategory)
             }
         })           
         
@@ -101,9 +110,5 @@ export async function addNewProduct(addProductFormState:AddProductFormState,addN
         }
     }
 
-    revalidatePath(`/products/${newProduct.id}`);
-    return {
-        errors: {},
-        success: true,
-    };
+    redirect(`/products/${newProduct.id}`);
 }
